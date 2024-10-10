@@ -114,7 +114,7 @@ def filter_url_ticketmaster_ca(target_url):
 
                             if current_date < target_date and generalinfo != "":
                                 ticketmaster_link.append(target_url)
-                                convert_json('ticketmaster_link.json', target_url)
+                                convert_json('website_ticketmaster_link_ticketmaster.json', target_url)
                                 return "success_value"
                                     
                     except:
@@ -165,7 +165,7 @@ def filter_url_ticketmaster(target_url):
                             if current_date < target_date and generalinfo != "":
                                 type_event = "coming event"
                                 ticketmaster_link.append(target_url)
-                                convert_json('ticketmaster_link.json', target_url)
+                                convert_json('website_ticketmaster_link_ticketmaster.json', target_url)
 
                     except:
                         return "No link"
@@ -205,7 +205,7 @@ def filter_url_livenation(targetUrl, max_retries=5, delay=10):
                     try:
                         if data["props"]["pageProps"]["edpData"]["context"]["discoveryEvent"]["edpPopup"]["linkText"] == "Face Value Ticket Exchange":
                             livenation_link.append(target_url)
-                            convert_json('livenation_link.json', target_url)
+                            convert_json('website_ticketmaster_link_livenation_.json', target_url)
                             return data["props"]["pageProps"]["edpData"]["context"]["discoveryEvent"]["edpPopup"]["linkText"]
                     except:
                         return "No Value"           
