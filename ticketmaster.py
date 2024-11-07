@@ -83,8 +83,7 @@ bad_link = []
 ticketmaster_link = []
 ticketmaster_all_url = []
 
-# ticketmaster ca
-# ticketmaster ca
+
 def filter_url_ticketmaster_ca(target_url):
     retries = 3
 
@@ -275,13 +274,14 @@ def main():
         '/discover/concerts?classificationId=KnvZfZ7vAe7',
         'discover/concerts?classificationId=KnvZfZ7vAvv'
          ]
-
+    category = 0
     for concert in concerts:
         try:
+            category = category + 1
             root = get_lxml(token, f"https://www.ticketmaster.com/{concert}")
             data = json.loads(root.xpath("//script[@id='__NEXT_DATA__']")[0].text)
             events = data.get("props", "").get("pageProps", "").get("eventsJsonLD", "")[0]
-            print(concert)
+            
             if events:
                 for link in events:
                   
@@ -298,9 +298,16 @@ def main():
                         convert_json('bad_link.json', link)
                     ticketmaster_all_url.append(link)
                     convert_json('all_url.json', link)
-                    print(f"bad_url = {len(set(bad_link))} and livenation_concert  = {len(set(livenation_link))} and ticketmaster = {len(set(ticketmaster_link))} and all_website_link.json ={len(set(ticketmaster_all_url))}")
+                    os.system('clear')
+                    print(f"Category : {category}/{len(concerts)}")
+                    print(f"Bad_url = {len(set(bad_link))}")
+                    print(f"Livenation_concert  = {len(set(livenation_link))}")
+                    print(f"Ticketmaster = {len(set(ticketmaster_link))}")
+                    print(f"Total process = {len(set(ticketmaster_all_url))}")
 
+                    
                 for i in range(1,50):
+                    print(i)
                     try:
                         concert1 = concert.replace("/discover/concerts?classificationId=","")
                         concert1 = concert1.replace("discover/concerts?classificationId=","")
@@ -329,7 +336,13 @@ def main():
                                     convert_json('bad_link.json', link)
                                 ticketmaster_all_url.append(link)
                                 convert_json('all_url.json', link)
-                                print(f"bad_url = {len(set(bad_link))} and livenation_concert  = {len(set(livenation_link))} and ticketmaster = {len(set(ticketmaster_link))} and all_website_link.json ={len(set(ticketmaster_all_url))}")
+                                os.system('clear')
+                                print(f"Category : {category}/{len(concerts)}")
+                                print(f"Bad_url = {len(set(bad_link))}")
+                                print(f"Livenation_concert  = {len(set(livenation_link))}")
+                                print(f"Ticketmaster = {len(set(ticketmaster_link))}")
+                                print(f"Total process = {len(set(ticketmaster_all_url))}")
+
 
                     except Exception as ex:
                         print(ex)
